@@ -36,8 +36,7 @@ public class BaseTest {
     @AfterEach
     void addAttachments() {
         try { Attach.screenshotAs("Last screenshot"); } catch (Exception ignored) {}
-        //try { Attach.pageSource(); } catch (Exception ignored) {}
-
+        try { Attach.pageSource(); } catch (Exception ignored) {}
         closeWebDriver();
 
     }

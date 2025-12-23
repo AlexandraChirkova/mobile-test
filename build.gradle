@@ -26,7 +26,6 @@ dependencies {
     testImplementation "com.codeborne:selenide-appium:7.12.3"
 
     testImplementation "io.appium:java-client:9.2.2"
-    testImplementation "org.seleniumhq.selenium:selenium-java:4.17.0"
 
     testImplementation "org.junit.jupiter:junit-jupiter:5.10.0"
 
