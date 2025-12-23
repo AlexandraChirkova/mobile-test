@@ -12,12 +12,22 @@ public class SearchTest extends BaseTest {
 
     @Test
     void successfulSearchTest() {
-        step("Type search", () -> {
-            $(accessibilityId("Search Wikipedia")).shouldBe(visible).click();
-            $(id("org.wikipedia.alpha:id/search_src_text")).sendKeys("Appium");
+
+        step("Open search", () ->
+                $(accessibilityId("Search Wikipedia"))
+                        .shouldBe(visible)
+                        .click()
+        );
+
+        step("Type search text", () -> {
+            var input = $(id("org.wikipedia.alpha:id/search_src_text"));
+            input.shouldBe(visible).click();
+            input.toWebElement().sendKeys("Appium");
         });
-        step("Verify content found", () ->
+
+        step("Verify results", () ->
                 $$(id("org.wikipedia.alpha:id/page_list_item_title"))
-                        .shouldHave(sizeGreaterThan(0)));
+                        .shouldHave(sizeGreaterThan(0))
+        );
     }
 }
