@@ -14,7 +14,8 @@ public class OpenArticleTests extends BaseTest {
     void openAnyArticleTest() {
         step("Open search and type query", () -> {
             $(accessibilityId("Search Wikipedia")).click();
-            $(id("org.wikipedia.alpha:id/search_src_text")).setValue("Appium");
+            $(id("org.wikipedia.alpha:id/search_src_text")).sendKeys("Appium");
+
         });
 
         step("Open first search result", () -> {

@@ -19,7 +19,6 @@ public class BrowserstackDriver implements WebDriverProvider {
 
         try {
             var cfg = ConfigProvider.config;
-
             String hub = cfg.bsHub()
                     .replace("https://", "")
                     .replace("http://", "");
