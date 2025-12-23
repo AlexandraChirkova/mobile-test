@@ -22,14 +22,22 @@ allure{
 }
 
 dependencies {
-    testImplementation 'com.codeborne:selenide:7.2.0'
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
-    testImplementation 'io.appium:java-client:9.2.2'
-    testImplementation 'org.seleniumhq.selenium:selenium-java:4.17.0'
-    testImplementation "io.qameta.allure:allure-java-commons:2.27.0"
-    testImplementation("io.rest-assured:rest-assured:6.0.0")
+    testImplementation "com.codeborne:selenide:7.12.3"
+    testImplementation "com.codeborne:selenide-appium:7.12.3"
+
+    testImplementation "io.appium:java-client:9.2.2"
+    testImplementation "org.seleniumhq.selenium:selenium-java:4.17.0"
+
+    testImplementation "org.junit.jupiter:junit-jupiter:5.10.0"
+
     testImplementation "io.qameta.allure:allure-selenide:2.27.0"
+    testImplementation "io.qameta.allure:allure-java-commons:2.27.0"
+
     testImplementation "org.aeonbits.owner:owner:1.0.12"
+
+    testImplementation "io.rest-assured:rest-assured:6.0.0"
+
+    testImplementation "jakarta.annotation:jakarta.annotation-api:2.1.1"
 }
 
 tasks.withType(Test) {

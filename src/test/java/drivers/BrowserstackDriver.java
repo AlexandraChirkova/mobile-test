@@ -8,7 +8,7 @@ import io.appium.java_client.android.options.UiAutomator2Options;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import java.net.URL;
 
 public class BrowserstackDriver implements WebDriverProvider {
@@ -35,6 +35,10 @@ public class BrowserstackDriver implements WebDriverProvider {
             options.setCapability("appium:automationName", "UIAutomator2");
             options.setCapability("appium:deviceName", cfg.androidDevice());
             options.setCapability("appium:platformVersion", cfg.androidOsVersion());
+
+            options.setCapability("appium:noReset", false);
+            options.setCapability("appium:fullReset", true);
+            options.setCapability("appium:autoGrantPermissions", true);
 
             return new AndroidDriver(new URL(remoteUrl), options);
 
