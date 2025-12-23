@@ -1,6 +1,7 @@
 package helpers;
 
 import static io.restassured.RestAssured.given;
+import static config.ConfigProvider.config;
 
 
 public class Browserstack {
@@ -9,7 +10,7 @@ public class Browserstack {
         String url = String.format("https://api.browserstack.com/app-automate/sessions/%s.json", sessionId);
 
         return given()
-                .auth().basic("bsuser_jq3Zgk", "dqu9Gk2Zmsqqcry68Anw")
+                .auth().basic(config.bsUser(), config.bsKey())
                 .get(url)
                 .then()
                 .log().status()
