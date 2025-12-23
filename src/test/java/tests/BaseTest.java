@@ -39,8 +39,8 @@ public class BaseTest {
 
         closeWebDriver();
 
-        if (sessionId != null) {
+   /*     if (sessionId != null) {
             Attach.addVideo(sessionId);
-        }
+        }*/
     }
 }
