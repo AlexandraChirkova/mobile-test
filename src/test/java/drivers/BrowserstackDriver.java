@@ -1,49 +1,40 @@
 package drivers;
 
-import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.WebDriverProvider;
-import config.ConfigProvider;
-import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.options.UiAutomator2Options;
+import config.AppConfig;
+import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
-import jakarta.annotation.Nonnull;
+import javax.annotation.Nonnull;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 public class BrowserstackDriver implements WebDriverProvider {
+    private final AppConfig config = ConfigFactory.create(AppConfig.class, System.getProperties());
+
 
     @Nonnull
     @Override
     public WebDriver createDriver(@Nonnull Capabilities ignored) {
 
+        MutableCapabilities caps = new MutableCapabilities();
+
+        caps.setCapability("browserstack.user", config.bsUser());
+        caps.setCapability("browserstack.key", config.bsKey());
+
+        caps.setCapability("app", config.androidApp());
+
+        caps.setCapability("deviceName", config.androidDevice());
+        caps.setCapability("platformVersion", config.androidOsVersion());
+
         try {
-            var cfg = ConfigProvider.config;
-            String hub = cfg.bsHub()
-                    .replace("https://", "")
-                    .replace("http://", "");
-
-            String remoteUrl =
-                    "https://" + cfg.bsUser() + ":" + cfg.bsKey() + "@" + hub;
-
-            Configuration.remote = remoteUrl;
-
-            UiAutomator2Options options = new UiAutomator2Options();
-
-            options.setCapability("appium:app", cfg.androidApp());
-            options.setCapability("platformName", "Android");
-            options.setCapability("appium:automationName", "UIAutomator2");
-            options.setCapability("appium:deviceName", cfg.androidDevice());
-            options.setCapability("appium:platformVersion", cfg.androidOsVersion());
-
-            options.setCapability("appium:noReset", false);
-            options.setCapability("appium:fullReset", true);
-            options.setCapability("appium:autoGrantPermissions", true);
-
-            return new AndroidDriver(new URL(remoteUrl), options);
-
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to create BrowserStack driver", e);
+            return new RemoteWebDriver(
+                    new URL(config.bsHub()), caps);
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
         }
     }
 }
