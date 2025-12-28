@@ -15,7 +15,6 @@ import java.net.URL;
 public class BrowserstackDriver implements WebDriverProvider {
     private final AppConfig config = ConfigFactory.create(AppConfig.class, System.getProperties());
 
-
     @Nonnull
     @Override
     public WebDriver createDriver(@Nonnull Capabilities ignored) {
